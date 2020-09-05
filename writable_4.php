@@ -8,6 +8,11 @@ $loop = \React\EventLoop\Factory::create();
 $readable = new \React\Stream\ReadableResourceStream(STDIN, $loop);
 $writable = new \React\Stream\WritableResourceStream(STDOUT, $loop);
 
+// this works like a transfer stream, its constructor accepts a callback which is used to process the passed data
+$toUpper = new \React\Stream\ThroughStream(function ($chunk){
+    return strtoupper($chunk);
+});
+
 // create a readable stream and when this stream receive a chunk of data it
 // simply write it to writable stream
 //$readable->on('data', function ($chunk) use($writable){
@@ -15,7 +20,7 @@ $writable = new \React\Stream\WritableResourceStream(STDOUT, $loop);
 //});
 
 // we can achieve the same result using the 'pipe' method
-$readable->pipe($writable);
+$readable->pipe($toUpper)->pipe($writable);
 
 $loop->run();
 
