@@ -27,6 +27,22 @@ the pool. (step 5)
 
 8. When new user arrives, will receive a message excepts current one. (step 8)
 
+9. **Note: *_Remember ```SplObjectStorage``` is a map between object and data. Out case data will be a users name._***
+
+10. So we cannot use ```attach()``` and ```detach()``` methods. Instead we will use connect object as offset keys. We add two
+additional methods. ```getConnectionName()``` and ```setConnectionName()```. Pass the ConnectionInterface.
+
+11. **Editing code on line of step 3:** When a new user arrives ask for user name, and store it or set it with an empty
+ name. (step 9 & 10)
+
+12. Then next time data from this connection we check if we have a name associated with it we consider it as a message. 
+But if this connection dose not have a stored name, we store the data name. (step 11)
+
+13. **Editing code on line of step 4:** Updating this chat notification with a username
+
+14. **Editing code on line of step 5:** Removing the connection when it closes. Again first we get the name for this 
+connection, then remove it, then send a notification.
+
 
 
  
